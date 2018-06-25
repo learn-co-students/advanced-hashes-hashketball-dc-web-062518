@@ -144,6 +144,7 @@ def shoe_size(p_name)
       descriptions[:players].each do |name, details|
       if name == p_name
         return details[:shoe]
+       
       end
     end
   end
@@ -167,18 +168,18 @@ def team_names
 end
 
 
-#def player_numbers(t_name)
- # game_hash.collect do |wich, descriptions|
+def player_numbers(t_name)
+  arr = []
+  game_hash.collect do |wich, descriptions|
     
- #   if descriptions[:team_name] == t_name
-      
- #     descriptions.each do |name, detail|
- #       binding.pry
-  #      detail[:number]
- #     end
- #   end
- # end
-#end
+    if descriptions[:team_name] == t_name
+       descriptions[:players].each do |info, details|
+       arr << details[:number]
+     end
+    end
+  end
+  arr
+end
 
 
 def player_stats(p_name)
@@ -197,17 +198,19 @@ def big_shoe_rebounds
   player = ''
   game_hash.each do |wich, descriptions|
     descriptions[:players].each do |name, details|
+      #binding.pry
       if shoe_size(name) > size
-        show_size(name) = size
+        size = shoe_size(name)
         player = name
+        
       end
     end
   end 
   game_hash.each do |wich2, descriptions2|
-    descriptions[:players].each do |name2, details2|
+    descriptions2[:players].each do |name2, details2|
       
       if name2 == player
-        return details[:rebounds]
+        return details2[:rebounds]
       end
     end
   end
